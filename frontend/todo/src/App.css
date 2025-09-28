@@ -1,0 +1,16 @@
+* , ::before , ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.card  {
+  transition: 0.3s;
+   box-shadow: 2px 4px 10px rgba(26, 25, 25, 0.3);
+}
+
+.card:hover {
+  transform: scale(1.1)
+ 
+}
+
+

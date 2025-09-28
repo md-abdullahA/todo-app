@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#o$zka%xw0pjqm&is*bd_1wf!u=6%nfrn#_uu3oad0!v%2n4va'
+SECRET_KEY = 'django-insecure-g5t*l^^glu%08m$z5=t=2_v9=z&14ta0ib^jl%@!f5!lpwbajx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    "corsheaders",
+
     'rest_framework',
     'todo_app',
 ]
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -122,22 +126,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-INSTALLED_APPS = [
-    ...,
-    "corsheaders",
-    ...
-]
 
-MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",  # must be at the top, before CommonMiddleware
-    "django.middleware.common.CommonMiddleware",
-    ...
-]
-
-# Allow React frontend
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",   # Vite default
-    "http://localhost:5178",   # your current port
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:5178",
-]
+CORS_ALLOW_ALL_ORIGINS = True

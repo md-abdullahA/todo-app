@@ -8,6 +8,7 @@ const todoApi = axios.create({
 });
 
 
+
 export const fetchTodos = createAsyncThunk("todos/fetchTodos", async () => {
   const res = await todoApi.get("/");
   return res.data;
@@ -22,6 +23,13 @@ export const toggleTodo = createAsyncThunk("todos/toggleTodo", async (todo) => {
   const res = await todoApi.put(`/${todo.id}/`, {
     ...todo,
     completed: !todo.completed,
+  });
+  return res.data;
+});
+export const editTodo = createAsyncThunk("todos/editTodo", async (todo) => {
+  const res = await todoApi.put(`/${todo.id}/`, {
+    ...todo,
+    title: todo.title, 
   });
   return res.data;
 });
@@ -51,10 +59,14 @@ const todosSlice = createSlice({
         const i = state.items.findIndex((t) => t.id === action.payload.id);
         state.items[i] = action.payload;
       })
+      .addCase(editTodo.fulfilled, (state, action) => {
+        const i = state.items.findIndex((t) => t.id === action.payload.id);
+        state.items[i] = action.payload;
+      })
       .addCase(deleteTodo.fulfilled, (state, action) => {
         state.items = state.items.filter((t) => t.id !== action.payload);
       });
-  },
+},
 });
 
 export default todosSlice.reducer;
